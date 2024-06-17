@@ -1,0 +1,36 @@
+﻿@WebAPI_HostAddress = https://localhost:7234
+@idSavez = 1143
+
+GET {{WebAPI_HostAddress}}/Savez/ReturnAllSavez
+
+###
+
+POST {{WebAPI_HostAddress}}/Savez/AddSavez
+Content-Type: application/json
+
+{
+    "savezID":"0",
+    "naziv": "Prophet Alliance",
+    "datumformiranja": "2024-05-19T23:06:35"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Savez/UpdateSavez
+Content-Type: application/json
+
+{
+   "savezID": 1143,
+   "naziv": "Prophet Alliance",
+   "datumFormiranja": "2024-05-19T23:06:35"
+
+}
+
+###
+GET {{WebAPI_HostAddress}}/Savez/ReturnSavezById/{{idSavez}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/Savez/DeleteSavez/{{idSavez}}
+
+###

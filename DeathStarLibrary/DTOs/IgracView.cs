@@ -38,6 +38,7 @@ public class IgracView
             Drzava = i.Drzava;
             Opis = i.Opis;
             Slika = i.Slika;
+            Savez = new(i!.Savez!);
         }
     }
 }

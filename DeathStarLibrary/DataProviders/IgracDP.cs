@@ -43,7 +43,7 @@ public static class IgracDP
             {
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
-
+            
             Igrac o = new()
             {
                 KorisnickoIme = p.KorisnickoIme,
