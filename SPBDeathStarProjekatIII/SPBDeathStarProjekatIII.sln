@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPBDeathStarProjekatIII", "SPBDeathStarProjekatIII.csproj", "{CE510D50-DF7D-4251-BF5A-65F68E016027}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathStarLibrary", "..\DeathStarLibrary\DeathStarLibrary.csproj", "{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE510D50-DF7D-4251-BF5A-65F68E016027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE510D50-DF7D-4251-BF5A-65F68E016027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE510D50-DF7D-4251-BF5A-65F68E016027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE510D50-DF7D-4251-BF5A-65F68E016027}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0FF2A70E-F928-455D-9CBA-D199512C21B2}
+	EndGlobalSection
+EndGlobal
