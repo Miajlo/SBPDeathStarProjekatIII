@@ -1,0 +1,38 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idSatelit = 182
+
+GET {{WebAPI_HostAddress}}/Satelit/ReturnAllSatelit
+
+###
+
+POST {{WebAPI_HostAddress}}/Satelit/AddSatelit
+Content-Type: application/json
+
+{
+    "naziv": "Neki",
+    "precnik": 3475,
+    "rastojanjeOP": 38400,
+    "naseobine": "N"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Satelit/UpdateSatelit
+Content-Type: application/json
+
+{
+   "satelitID": 180,
+   "naziv": "Neki drugi",
+   "precnik": 3475,
+   "rastojanjeOP": 38400,
+   "naseobine": "N"
+}
+
+###
+GET {{WebAPI_HostAddress}}/Satelit/ReturnSatelitById/{{idSatelit}}
+
+###
+DELETE {{WebAPI_HostAddress}}/Satelit/DeleteSatelit/{{idSatelit}}
+
+###
+

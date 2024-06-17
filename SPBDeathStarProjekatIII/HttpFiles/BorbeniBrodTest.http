@@ -1,0 +1,41 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idBorbeniBrod = 117
+
+GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnAllBorbeniBrod
+
+###
+
+POST {{WebAPI_HostAddress}}/BorbeniBrod/AddBorbeniBrod
+Content-Type: application/json
+
+{
+    "brojTopova": 1,
+    "posedujeFotTorp": "N",
+    "tip": "Krstarica",
+    "naziv": "Brodic",
+    "maxBrzina": 0
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/BorbeniBrod/UpdateBorbeniBrod
+Content-Type: application/json
+
+{
+   "brodID": 117,
+   "brojTopova": 1,
+   "posedujeFotTorp": "N",
+   "tip": "Krstarica",
+   "naziv": "Brodic",
+   "maxBrzina": 0
+}
+
+###
+GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnBorbeniBrodById/{{idBorbeniBrod}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/BorbeniBrod/DeleteBorbeniBrod/{{idBorbeniBrod}}
+
+###
+

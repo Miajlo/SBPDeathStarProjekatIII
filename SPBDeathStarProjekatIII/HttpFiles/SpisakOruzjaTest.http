@@ -1,0 +1,35 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idSpisakOruzja = 182
+
+GET {{WebAPI_HostAddress}}/SpisakOruzja/ReturnAllSpisakOruzja
+
+###
+
+POST {{WebAPI_HostAddress}}/SpisakOruzja/AddSpisakOruzja
+Content-Type: application/json
+
+{
+    "svemirskaStanica": null,
+    "oruzje": "Foton Torpedo"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/SpisakOruzja/UpdateSpisakOruzja
+Content-Type: application/json
+
+{
+   "soid": 180,
+   "svemirskaStanica": null,
+   "oruzje": "Foton Torpedo"
+}
+
+###
+GET {{WebAPI_HostAddress}}/SpisakOruzja/ReturnSpisakOruzjaById/{{idSpisakOruzja}}
+
+###
+DELETE {{WebAPI_HostAddress}}/SpisakOruzja/DeleteSpisakOruzja/{{idSpisakOruzja}}
+
+###
+
+

@@ -1,0 +1,42 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idSvemirskaStanica = 182
+
+GET {{WebAPI_HostAddress}}/SvemirskaStanica/ReturnAllSvemirskaStanica
+
+###
+
+POST {{WebAPI_HostAddress}}/SvemirskaStanica/AddSvemirskaStanica
+Content-Type: application/json
+
+{
+    "ssid": 115,
+    "naziv": "Orbita 7",
+    "brojLjudi": 100,
+    "velicina": 2500,
+    "rastojanjeOP": 300000,
+    "tip": "Vojna",
+    "namena": "Trgovina"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/SvemirskaStanica/UpdateSvemirskaStanica
+Content-Type: application/json
+
+{
+   "SvemirskaStanicaID": 180,
+   "naziv": "Neki drugi",
+   "precnik": 3475,
+   "rastojanjeOP": 38400,
+   "naseobine": "N"
+}
+
+###
+GET {{WebAPI_HostAddress}}/SvemirskaStanica/ReturnSvemirskaStanicaById/{{idSvemirskaStanica}}
+
+###
+DELETE {{WebAPI_HostAddress}}/SvemirskaStanica/DeleteSvemirskaStanica/{{idSvemirskaStanica}}
+
+###
+
+

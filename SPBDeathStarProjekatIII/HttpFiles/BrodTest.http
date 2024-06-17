@@ -1,0 +1,35 @@
+
+@WebAPI_HostAddress = https://localhost:7234
+@idBrod = 182
+
+GET {{WebAPI_HostAddress}}/Brod/ReturnAllBrod
+
+###
+
+POST {{WebAPI_HostAddress}}/Brod/AddBrod
+Content-Type: application/json
+
+{
+   "naziv": "Galactica",
+   "maxBrzina": 0
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Brod/UpdateBrod
+Content-Type: application/json
+
+{
+   "brodID": 180,
+   "naziv": "Galactica",
+   "maxBrzina": 0
+}
+
+###
+GET {{WebAPI_HostAddress}}/Brod/ReturnBrodById/{{idBrod}}
+
+###
+DELETE {{WebAPI_HostAddress}}/Brod/DeleteBrod/{{idBrod}}
+
+###
+

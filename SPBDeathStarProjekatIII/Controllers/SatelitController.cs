@@ -31,13 +31,7 @@ public class SatelitController : ControllerBase
         if (isError)
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
 
-        var response = new
-        {
-            message = "Uspesno azuriranje satelita",
-            SatelitID = id
-        };
-
-        return Ok(response);
+        return Ok(satelit);
     }
 
 
