@@ -51,6 +51,14 @@ public class PlanetaView
             BerilijumKol = p.BerilijumKol;
             TrilijumKol = p.TrilijumKol;
             JeMaticna = p.JeMaticna;
+            if (p.GlavniGrad != null)
+                GlavniGrad = new(p!.GlavniGrad!);
+            if (p!.Vlasnik! != null)
+                Vlasnik = new(p!.Vlasnik!);
+            if (p!.DominantnaRasa! != null)
+                DominantnaRasa = new(p.DominantnaRasa);
+            if (p!.Galaksija! != null)
+                Galaksija = new(p!.Galaksija!);
         }  
     }
 }

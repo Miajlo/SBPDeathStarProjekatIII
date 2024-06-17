@@ -26,13 +26,13 @@ public class PojavaController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult> ReturnPojava(int id)
     {
-        var (isError, pojave, error) = await PojavaDP.ReturnPojavaAsync(id);
+        var (isError, pojava, error) = await PojavaDP.ReturnPojavaAsync(id);
 
         if (isError)
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
 
 
-        return Ok(pojave);
+        return Ok(pojava);
     }
 
 

@@ -1,6 +1,4 @@
-﻿using NHibernate.Proxy;
-
-namespace DeathStarLibrary.DataProviders;
+﻿namespace DeathStarLibrary.DataProviders;
 
 public static class PlanetaDP
 {
@@ -46,6 +44,11 @@ public static class PlanetaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Igrac? i = null;
+
+            if (p.Vlasnik != null)
+                i = await s.GetAsync<Igrac>(p!.Vlasnik!.IgracID!);
+
             Planeta o = new()
             {
                 Naziv = p.Naziv,
@@ -58,6 +61,7 @@ public static class PlanetaDP
                 BerilijumKol = p.BerilijumKol,
                 TrilijumKol = p.TrilijumKol,
                 JeMaticna = p.JeMaticna,
+                Vlasnik = i
             };
 
             await s.SaveOrUpdateAsync(o);

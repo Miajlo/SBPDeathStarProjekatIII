@@ -44,10 +44,17 @@ public static class PojavaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Planeta? planeta = null;
+            if (p!.Planeta! != null)
+                planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
             Pojava o = new()
             {
                 Naziv = p.Naziv,
-                Tip = p.Tip
+                Opasna = p.Opasna,
+                Tip = p.Tip,
+                RastojanjeOP = p.RastojanjeOP,
+                Planeta = planeta
             };
 
             await s.SaveOrUpdateAsync(o);
@@ -79,6 +86,17 @@ public static class PojavaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             Pojava pojava = s.Load<Pojava>(p.PojavaID);
+
+            if (pojava == null)
+                return "Ne postoji trazena pojava".ToError(404);
+
+            if (p!.Planeta != null && p!.Planeta!.PlanetaID! != pojava!.Planeta!.PlanetaID)
+            {
+                var plan = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+                if (plan == null)
+                    return "Ne postoji trazena planeta".ToError(400);
+                pojava.Planeta = plan;
+            }
             pojava.Naziv = p.Naziv;
             pojava.Tip = p.Tip;
             pojava.Opasna = p.Opasna;
@@ -128,7 +146,7 @@ public static class PojavaDP
         return pojavaView;
     }
 
-    public async static Task<Result<bool, ErrorMessage>> DeletePojavaAsync(int id)
+    public async static Task<Result<int, ErrorMessage>> DeletePojavaAsync(int id)
     {
         ISession? s = null;
 
@@ -154,6 +172,6 @@ public static class PojavaDP
             s?.Dispose();
         }
 
-        return true;
+        return id;
     }
 }

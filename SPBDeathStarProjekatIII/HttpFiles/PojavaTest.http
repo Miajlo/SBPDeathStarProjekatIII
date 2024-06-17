@@ -1,0 +1,44 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idPojava = 145
+
+GET {{WebAPI_HostAddress}}/Pojava/ReturnAllPojava
+
+###
+
+POST {{WebAPI_HostAddress}}/Pojava/AddPojava
+Content-Type: application/json
+
+{
+    "tip": "Crna rupa",
+    "naziv": "Allicorn",
+    "opasna": "Y",
+    "rastojanjeOP": 234234,
+    "Planeta": {
+        "PlanetaID":1047
+    }
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Pojava/UpdatePojava
+Content-Type: application/json
+
+{
+   "PojavaID":145,
+   "tip": "Crna rupa",
+   "naziv": "Allicorn A*",
+   "opasna": "Y",
+   "rastojanjeOP": 234234,
+   "Planeta": {
+       "PlanetaID": 1048
+   }
+}
+
+###
+GET {{WebAPI_HostAddress}}/Pojava/ReturnPojavaById/{{idPojava}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/Pojava/DeletePojava/{{idPojava}}
+
+###
