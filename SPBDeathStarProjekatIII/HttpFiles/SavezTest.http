@@ -1,5 +1,5 @@
 ﻿@WebAPI_HostAddress = https://localhost:7234
-@idSavez = 1143
+@idSavez = 1148
 
 GET {{WebAPI_HostAddress}}/Savez/ReturnAllSavez
 
@@ -10,7 +10,11 @@ Content-Type: application/json
 
 {
     "naziv": "Prophet Alliance",
-    "datumformiranja": "2024-05-19T23:06:35"
+    "datumformiranja": "2024-05-19T23:06:35",
+    "NadSavez":{
+        "SavezID":1146
+    }
+   
 }
 
 ###

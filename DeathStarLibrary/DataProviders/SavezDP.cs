@@ -46,11 +46,16 @@ public static class SavezDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Savez? nadSavez = null;
+
+            if (p.NadSavez != null && p.NadSavez.SavezID > 0)
+                 nadSavez = await s.GetAsync<Savez>(p!.NadSavez!.SavezID);
+
             Savez o = new()
             {
                 Naziv = p.Naziv,
                 DatumFormiranja = p.DatumFormiranja,
-                SavezID = p.SavezID,
+                NadSavez = nadSavez,
             };
 
            
