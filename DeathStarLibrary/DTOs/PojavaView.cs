@@ -20,6 +20,8 @@ public class PojavaView
             Naziv = p.Naziv;
             Opasna = p.Opasna;
             RastojanjeOP = p.RastojanjeOP;
+            if(p!.Planeta != null)
+                Planeta = new(p!.Planeta!);
         }
     }
 }

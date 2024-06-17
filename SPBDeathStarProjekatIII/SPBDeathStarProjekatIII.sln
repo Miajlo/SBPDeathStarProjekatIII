@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPBDeathStarProjekatIII", "SPBDeathStarProjekatIII.csproj", "{CE510D50-DF7D-4251-BF5A-65F68E016027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPBDeathStarProjekatIII", "SPBDeathStarProjekatIII.csproj", "{CE510D50-DF7D-4251-BF5A-65F68E016027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathStarLibrary", "..\DeathStarLibrary\DeathStarLibrary.csproj", "{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathStarLibrary", "..\DeathStarLibrary\DeathStarLibrary.csproj", "{64F374FA-41D0-44C9-B0D5-BA8553A1CF9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

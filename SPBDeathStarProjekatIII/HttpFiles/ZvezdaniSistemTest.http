@@ -1,0 +1,31 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idZvezdaniSistem = 1143
+
+GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnAllZvezdaniSistem
+
+###
+
+POST {{WebAPI_HostAddress}}/ZvezdaniSistem/AddZvezdaniSistem
+Content-Type: application/json
+
+{
+ 
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/ZvezdaniSistem/UpdateZvezdaniSistem
+Content-Type: application/json
+
+{
+   "ZvezdaniSistemID": 1143,
+}
+
+###
+GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnZvezdaniSistemById/{{idZvezdaniSistem}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/ZvezdaniSistem/DeleteZvezdaniSistem/{{idZvezdaniSistem}}
+
+###

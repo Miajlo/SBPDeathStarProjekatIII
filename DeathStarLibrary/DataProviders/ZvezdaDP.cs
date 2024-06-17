@@ -137,6 +137,9 @@ public static class ZvezdaDP
 
         try
         {
+            if (id == 1)
+                return "You don't have permission to delete zvezda!!!!".ToError(403);
+
             s = DataLayer.GetSession();
 
             if (!(s?.IsConnected ?? false))

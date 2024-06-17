@@ -24,6 +24,7 @@ public class SvemirskaStanicaView
             RastojanjeOP = s.RastojanjeOP;
             Tip = s.Tip;
             Namena = s.Namena;
+            Planeta = new(s.Planeta);
         }    
     }
 }

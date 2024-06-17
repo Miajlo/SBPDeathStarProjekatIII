@@ -14,6 +14,7 @@ public class SpisakOruzjaView
         {
             SOID = s.SOID;
             Oruzje = s.Oruzje;
+            SvemirskaStanica = new(s.SvemirskaStanica);
         }
     }
 }

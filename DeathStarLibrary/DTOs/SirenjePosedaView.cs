@@ -17,6 +17,7 @@ public class SirenjePosedaView
             SPID = s.SPID;
             Tip = s.Tip;
             Datum = s.Datum;
+            PrethodniVlasnik = new(s!.PrethodniVlasnik!);
         }
         
     }

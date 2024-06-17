@@ -1,0 +1,36 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idZvezda = 10
+
+GET {{WebAPI_HostAddress}}/Zvezda/ReturnAllZvezda
+
+###
+
+POST {{WebAPI_HostAddress}}/Zvezda/AddZvezda
+Content-Type: application/json
+
+{
+    "ZvezdaID":"0",
+    "naziv": "Prophet Alliance",
+    "datumformiranja": "2024-05-19T23:06:35"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Zvezda/UpdateZvezda
+Content-Type: application/json
+
+{
+   "ZvezdaID": 1143,
+   "naziv": "Prophet Alliance",
+   "Tip": ""
+
+}
+
+###
+GET {{WebAPI_HostAddress}}/Zvezda/ReturnZvezdaById/{{idZvezda}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/Zvezda/DeleteZvezda/{{idZvezda}}
+
+###

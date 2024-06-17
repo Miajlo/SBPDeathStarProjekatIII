@@ -23,6 +23,8 @@ public class SavezView
             SavezID = savez.SavezID;
             Naziv = savez.Naziv;
             DatumFormiranja = savez.DatumFormiranja;
+            if (savez!.NadSavez != null)
+                NadSavez = new(savez!.NadSavez!);
         }
     }
 }

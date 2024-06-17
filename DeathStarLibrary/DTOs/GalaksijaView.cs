@@ -19,6 +19,7 @@ public class GalaksijaView
             Naziv = g.Naziv;
             BrojZvezda = g.BrojZvezda;
             BrojPlaneta = g.BrojPlaneta;
+            DominantnaRasa = new(g.DominantnaRasa);
         }
     }
 

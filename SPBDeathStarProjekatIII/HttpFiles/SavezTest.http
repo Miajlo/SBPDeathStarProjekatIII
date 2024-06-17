@@ -9,7 +9,6 @@ POST {{WebAPI_HostAddress}}/Savez/AddSavez
 Content-Type: application/json
 
 {
-    "savezID":"0",
     "naziv": "Prophet Alliance",
     "datumformiranja": "2024-05-19T23:06:35"
 }
@@ -20,10 +19,9 @@ PATCH {{WebAPI_HostAddress}}/Savez/UpdateSavez
 Content-Type: application/json
 
 {
-   "savezID": 1143,
+   "savezID": 23423423,
    "naziv": "Prophet Alliance",
    "datumFormiranja": "2024-05-19T23:06:35"
-
 }
 
 ###
