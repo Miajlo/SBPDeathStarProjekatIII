@@ -14,8 +14,6 @@ public class GradView
         {
             GradID = g.GradID;
             Naziv = g.Naziv;
-            if (g!.Planeta != null)
-                Planeta = new(g!.Planeta!);
         }
     }
 }
