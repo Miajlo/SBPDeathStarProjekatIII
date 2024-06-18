@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idKvadrant = 182
+@idKvadrant = 143
 
 GET {{WebAPI_HostAddress}}/Kvadrant/ReturnAllKvadrant
 
@@ -14,8 +14,11 @@ POST {{WebAPI_HostAddress}}/Kvadrant/AddKvadrant
 Content-Type: application/json
 
 {
-    "redniBroj": 1,
-    "procenjenPrecnik": 2344234
+    "redniBroj": 6,
+    "procenjenPrecnik": 2344234,
+    "galaksija": {
+      "galaksijaID": 1
+    }
 }
 
 ###
@@ -24,9 +27,9 @@ PATCH {{WebAPI_HostAddress}}/Kvadrant/UpdateKvadrant
 Content-Type: application/json
 
 {
-   "kvadrantID" : 180,
+   "kvadrantID" : 143,
    "redniBroj": 1,
-   "procenjenPrecnik": 2344234
+   "procenjenPrecnik": 111111
 }
 
 

@@ -62,7 +62,7 @@ public class SvemirskaStanicaController : ControllerBase
         }
         else
         {
-            return BadRequest("Neuspešan upis SvemirskaStanicaa.");
+            return BadRequest("Neuspešan upis SvemirskaStanica.");
         }
     }
 
@@ -81,7 +81,7 @@ public class SvemirskaStanicaController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno ayuriranje svemirske stanice",
+            message = "Uspesno azuriranje svemirske stanice",
             SSID = svemirskaStanica.SSID
         };
 

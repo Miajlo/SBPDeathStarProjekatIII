@@ -8,9 +8,14 @@ public class GradView
 
     public GradView() { }
 
-    internal GradView(Grad g) : this()
+    internal GradView(Grad? g) : this()
     {
-        GradID = g.GradID;
-        Naziv = g.Naziv;
+        if(g!=null)
+        {
+            GradID = g.GradID;
+            Naziv = g.Naziv;
+            if (g!.Planeta != null)
+                Planeta = new(g!.Planeta!);
+        }
     }
 }

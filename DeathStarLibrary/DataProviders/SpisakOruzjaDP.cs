@@ -44,9 +44,15 @@ public static class SpisakOruzjaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            SvemirskaStanica? sstanica = null;
+
+            if (p.SvemirskaStanica != null && p.SvemirskaStanica.SSID > 0)
+                sstanica = await s.GetAsync<SvemirskaStanica>(p!.SvemirskaStanica!.SSID);
+
             SpisakOruzja o = new()
             {
-                Oruzje = p.Oruzje
+                Oruzje = p.Oruzje,
+                SvemirskaStanica=sstanica
             };
 
             await s.SaveOrUpdateAsync(o);

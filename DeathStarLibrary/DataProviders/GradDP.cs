@@ -45,9 +45,15 @@ public static class GradDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Planeta? planeta = null;
+
+            if (p.Planeta != null && p.Planeta.PlanetaID > 0)
+                planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
             Grad o = new()
             {
-                Naziv = p.Naziv
+                Naziv = p.Naziv,
+                Planeta=planeta
             };
 
             await s.SaveOrUpdateAsync(o);

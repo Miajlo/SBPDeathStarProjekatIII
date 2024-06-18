@@ -15,7 +15,7 @@ public static class SvemirskaStanicaDP
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
-
+    
             sstanice = (await s.QueryOver<SvemirskaStanica>().ListAsync())
                       .Select(p => new SvemirskaStanicaView(p)).ToList();
         }
@@ -45,6 +45,12 @@ public static class SvemirskaStanicaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Planeta? planeta = null;
+
+            if (ss.Planeta != null && ss.Planeta.PlanetaID > 0)
+                planeta = await s.GetAsync<Planeta>(ss!.Planeta!.PlanetaID);
+
+
             SvemirskaStanica o = new()
             {
                 Naziv = ss.Naziv,
@@ -52,7 +58,8 @@ public static class SvemirskaStanicaDP
                 Velicina = ss.Velicina,
                 RastojanjeOP = ss.RastojanjeOP,
                 Tip = ss.Tip,
-                Namena = ss.Namena
+                Namena = ss.Namena,
+                Planeta = planeta
             };
 
             await s.SaveOrUpdateAsync(o);
@@ -97,7 +104,7 @@ public static class SvemirskaStanicaDP
             }
             catch (Exception)
             {
-                return "Nemoguće ažurirati planetu.".ToError(400);
+                return "Nemoguće ažurirati svemirsku stanicu.".ToError(400);
             }
             finally
             {

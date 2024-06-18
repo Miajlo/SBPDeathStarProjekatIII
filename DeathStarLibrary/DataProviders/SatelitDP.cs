@@ -47,12 +47,18 @@ public static class SatelitDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Planeta? planeta = null;
+
+            if (p.Planeta != null && p.Planeta.PlanetaID > 0)
+                planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
             Satelit o = new()
             {
                 Naziv = p.Naziv,
                 Precnik = p.Precnik,
                 RastojanjeOP = p.RastojanjeOP,
                 Naseobine = p.Naseobine,
+                Planeta = planeta
             };
 
             await s.SaveAsync(o);

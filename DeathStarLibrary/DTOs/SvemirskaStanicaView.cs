@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DTOs;
+﻿using DeathStarLibrary.Entiteti;
+
+namespace DeathStarLibrary.DTOs;
 
 public class SvemirskaStanicaView
 {
@@ -24,7 +26,8 @@ public class SvemirskaStanicaView
             RastojanjeOP = s.RastojanjeOP;
             Tip = s.Tip;
             Namena = s.Namena;
-            Planeta = new(s.Planeta);
+            if (s!.Planeta != null)
+                Planeta = new(s!.Planeta!);
         }    
     }
 }

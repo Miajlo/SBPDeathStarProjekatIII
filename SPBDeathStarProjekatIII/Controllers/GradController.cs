@@ -10,7 +10,7 @@ public class GradController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult> ReturnZvezde()
+    public async Task<ActionResult> ReturnAllGrad()
     {
         var (isError, gradovi, error) = await GradDP.ReturnAllGrad();
 

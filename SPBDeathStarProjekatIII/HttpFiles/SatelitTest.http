@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idSatelit = 182
+@idSatelit = 183
 
 GET {{WebAPI_HostAddress}}/Satelit/ReturnAllSatelit
 
@@ -12,7 +12,10 @@ Content-Type: application/json
     "naziv": "Neki",
     "precnik": 3475,
     "rastojanjeOP": 38400,
-    "naseobine": "N"
+    "naseobine": "N",
+    "planeta": {
+      "planetaID": 1
+    }
 }
 
 ###
@@ -21,11 +24,11 @@ PATCH {{WebAPI_HostAddress}}/Satelit/UpdateSatelit
 Content-Type: application/json
 
 {
-   "satelitID": 180,
+   "satelitID": 183,
    "naziv": "Neki drugi",
    "precnik": 3475,
    "rastojanjeOP": 38400,
-   "naseobine": "N"
+   "naseobine": "Y"
 }
 
 ###

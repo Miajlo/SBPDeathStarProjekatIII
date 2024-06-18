@@ -16,8 +16,10 @@ public class KvadrantView
             KvadrantID = k.KvadrantID;
             RedniBroj = k.RedniBroj;
             ProcenjenPrecnik = k.ProcenjenPrecnik;
-            Galaksija = new(k!.Galaksija!);
-        }
-        
+            if (k.Galaksija != null)
+            {
+                Galaksija = new(k.Galaksija);
+            }
+        } 
     }
 }

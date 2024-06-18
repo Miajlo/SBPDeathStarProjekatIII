@@ -20,7 +20,8 @@ public class SatelitView
             Precnik = s.Precnik;
             RastojanjeOP = s.RastojanjeOP;
             Naseobine = s.Naseobine;
-            Planeta = new(s.Planeta);
+            if (s!.Planeta != null)
+                Planeta = new(s!.Planeta!);
         }
     }
 }

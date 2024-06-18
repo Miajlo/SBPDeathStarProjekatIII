@@ -44,10 +44,16 @@ public static class KvadrantDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Galaksija? galaksija = null;
+
+            if (p.Galaksija != null && p.Galaksija.GalaksijaID > 0)
+                galaksija = await s.GetAsync<Galaksija>(p!.Galaksija!.GalaksijaID);
+
             Kvadrant o = new()
             {
                 RedniBroj = p.RedniBroj,
-                ProcenjenPrecnik = p.ProcenjenPrecnik
+                ProcenjenPrecnik = p.ProcenjenPrecnik,
+                Galaksija=galaksija
             };
 
             await s.SaveOrUpdateAsync(o);

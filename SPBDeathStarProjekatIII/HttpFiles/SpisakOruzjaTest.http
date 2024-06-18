@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idSpisakOruzja = 182
+@idSpisakOruzja = 100
 
 GET {{WebAPI_HostAddress}}/SpisakOruzja/ReturnAllSpisakOruzja
 
@@ -9,8 +9,10 @@ POST {{WebAPI_HostAddress}}/SpisakOruzja/AddSpisakOruzja
 Content-Type: application/json
 
 {
-    "svemirskaStanica": null,
-    "oruzje": "Foton Torpedo"
+    "oruzje": "Foton Torpedo",
+    "svemirskaStanica": {
+      "ssid": 1
+    }
 }
 
 ###
@@ -19,9 +21,8 @@ PATCH {{WebAPI_HostAddress}}/SpisakOruzja/UpdateSpisakOruzja
 Content-Type: application/json
 
 {
-   "soid": 180,
-   "svemirskaStanica": null,
-   "oruzje": "Foton Torpedo"
+   "soid": 100,
+   "oruzje": "Kul oruzje"
 }
 
 ###
