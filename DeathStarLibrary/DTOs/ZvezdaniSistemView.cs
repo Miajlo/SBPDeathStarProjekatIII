@@ -17,6 +17,8 @@ public class ZvezdaniSistemView
         if(z!=null)
         {
             ZvezdaniSistemID = z.ZvezdaniSistemID;
+            ZvezdaSistema = new(z.ID.ZvezdaSistema);
+            PlanetaSistema = new(z.ID.PlanetaSistema);
         }
     }
 }

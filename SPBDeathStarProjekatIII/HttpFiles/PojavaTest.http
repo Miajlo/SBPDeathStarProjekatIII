@@ -5,6 +5,10 @@ GET {{WebAPI_HostAddress}}/Pojava/ReturnAllPojava
 
 ###
 
+GET {{WebAPI_HostAddress}}/Pojava/ReturnPojavaById/{{idPojava}}
+
+###
+
 POST {{WebAPI_HostAddress}}/Pojava/AddPojava
 Content-Type: application/json
 
@@ -34,11 +38,9 @@ Content-Type: application/json
    }
 }
 
-###
-GET {{WebAPI_HostAddress}}/Pojava/ReturnPojavaById/{{idPojava}}
 
 ###
-//1143
+
 DELETE {{WebAPI_HostAddress}}/Pojava/DeletePojava/{{idPojava}}
 
 ###

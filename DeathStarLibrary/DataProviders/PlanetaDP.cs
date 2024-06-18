@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DataProviders;
+﻿using DeathStarLibrary.Entiteti;
+
+namespace DeathStarLibrary.DataProviders;
 
 public static class PlanetaDP
 {
@@ -44,10 +46,23 @@ public static class PlanetaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
-            Igrac? i = null;
-
+            Igrac? rasa = null;
+            Galaksija? galaksija = null;
+            Rasa? domRasa = null;
+            Grad? glavniGrad = null;
+            
             if (p.Vlasnik != null)
-                i = await s.GetAsync<Igrac>(p!.Vlasnik!.IgracID!);
+                rasa = await s.GetAsync<Igrac>(p!.Vlasnik!.IgracID!);
+            
+            if (p!.Galaksija! != null)
+                galaksija = await s.GetAsync<Galaksija>(p!.Galaksija!.GalaksijaID);
+            
+            if (p!.DominantnaRasa! != null)
+                domRasa = await s.GetAsync<Rasa>(p!.DominantnaRasa!.RasaID);
+            
+            if (p!.GlavniGrad! != null)
+                glavniGrad = await s.GetAsync<Grad>(p!.GlavniGrad!.GradID);
+
 
             Planeta o = new()
             {
@@ -61,7 +76,10 @@ public static class PlanetaDP
                 BerilijumKol = p.BerilijumKol,
                 TrilijumKol = p.TrilijumKol,
                 JeMaticna = p.JeMaticna,
-                Vlasnik = i
+                Vlasnik = rasa,
+                DominantnaRasa = domRasa,
+                Galaksija = galaksija,
+                GlavniGrad = glavniGrad,
             };
 
             await s.SaveOrUpdateAsync(o);
@@ -93,6 +111,42 @@ public static class PlanetaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             Planeta planeta = s.Load<Planeta>(p.PlanetaID);
+
+            if (planeta == null)
+                return "Ne postoji trazena planeta".ToError(404);
+
+            if (p!.Vlasnik!= null && p!.Vlasnik!.IgracID! != planeta!.Vlasnik!.IgracID)
+            {
+                var igrac = await s.GetAsync<Igrac>(p!.Vlasnik!.IgracID);
+                if (igrac == null)
+                    return "Ne postoji trazen igrac".ToError(400);
+                planeta.Vlasnik = igrac;
+            }
+
+            if (p!.Galaksija!= null && p!.Galaksija!.GalaksijaID! != planeta!.Galaksija!.GalaksijaID)
+            {
+                var galaksija = await s.GetAsync<Galaksija>(p!.Galaksija!.GalaksijaID);
+                if (galaksija == null)
+                    return "Ne postoji trazena galaksija".ToError(400);
+                planeta.Galaksija = galaksija;
+            }
+
+            if (p!.DominantnaRasa!= null 
+                && p!.DominantnaRasa!.RasaID! != planeta!.DominantnaRasa!.RasaID)
+            {
+                var rasa = await s.GetAsync<Rasa>(p!.DominantnaRasa!.RasaID);
+                if (rasa == null)
+                    return "Ne postoji trazena rasa".ToError(400);
+                planeta.DominantnaRasa = rasa;
+            }
+
+            if(p!.GlavniGrad != null && p!.GlavniGrad!.GradID != planeta!.GlavniGrad!.GradID)
+            {
+                var grad = await s.GetAsync<Grad>(p!.GlavniGrad!.GradID);
+                if (grad == null)
+                    return "Ne postoji trazeni grad".ToError(404);
+                planeta.GlavniGrad = grad;
+            }
             planeta.Naziv = p.Naziv;
             planeta.X = p.X;
             planeta.Y = p.Y;

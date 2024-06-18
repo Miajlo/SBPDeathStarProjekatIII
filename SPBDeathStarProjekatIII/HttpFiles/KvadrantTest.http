@@ -3,6 +3,11 @@
 
 GET {{WebAPI_HostAddress}}/Kvadrant/ReturnAllKvadrant
 
+
+###
+
+GET {{WebAPI_HostAddress}}/Kvadrant/ReturnKvadrantById/{{idKvadrant}}
+
 ###
 
 POST {{WebAPI_HostAddress}}/Kvadrant/AddKvadrant
@@ -24,8 +29,6 @@ Content-Type: application/json
    "procenjenPrecnik": 2344234
 }
 
-###
-GET {{WebAPI_HostAddress}}/Kvadrant/ReturnKvadrantById/{{idKvadrant}}
 
 ###
 DELETE {{WebAPI_HostAddress}}/Kvadrant/DeleteKvadrant/{{idKvadrant}}

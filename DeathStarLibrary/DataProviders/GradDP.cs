@@ -84,16 +84,16 @@ public static class GradDP
                 grad.Naziv = p.Naziv;
                 await s.UpdateAsync(grad);
                 await s.FlushAsync();
-            }
-            catch (Exception)
-            {
-                return "Nemoguće ažurirati grad.".ToError(400);
-            }
-            finally
-            {
-                s?.Close();
-                s?.Dispose();
-            }
+        }
+        catch (Exception)
+        {
+            return "Nemoguće ažurirati grad.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
 
         return p;
     }

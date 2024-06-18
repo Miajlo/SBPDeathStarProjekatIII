@@ -1,7 +1,11 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idGrad = 182
+@idGrad = 1
 
 GET {{WebAPI_HostAddress}}/Grad/ReturnAllGrad
+
+###
+
+GET {{WebAPI_HostAddress}}/Grad/ReturnGradById/{{idGrad}}
 
 ###
 
@@ -21,9 +25,6 @@ Content-Type: application/json
    "gradID": 1,
    "naziv:" "Nis"
 }
-
-###
-GET {{WebAPI_HostAddress}}/Grad/ReturnGradById/{{idGrad}}
 
 ###
 DELETE {{WebAPI_HostAddress}}/Grad/DeleteGrad/{{idGrad}}

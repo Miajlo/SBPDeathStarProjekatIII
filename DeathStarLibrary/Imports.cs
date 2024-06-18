@@ -13,3 +13,4 @@ global using DeathStarLibrary.DataProviders;
 global using DeathStarLibrary.DTOs;
 global using SPBDeathStarProjekatIII;
 global using DeathStarLibrary;
+global using NHibernate.Linq;

@@ -6,6 +6,10 @@ GET {{WebAPI_HostAddress}}/Brod/ReturnAllBrod
 
 ###
 
+GET {{WebAPI_HostAddress}}/Brod/ReturnBrodById/{{idBrod}}
+
+###
+
 POST {{WebAPI_HostAddress}}/Brod/AddBrod
 Content-Type: application/json
 
@@ -24,9 +28,6 @@ Content-Type: application/json
    "naziv": "Galactica",
    "maxBrzina": 0
 }
-
-###
-GET {{WebAPI_HostAddress}}/Brod/ReturnBrodById/{{idBrod}}
 
 ###
 DELETE {{WebAPI_HostAddress}}/Brod/DeleteBrod/{{idBrod}}

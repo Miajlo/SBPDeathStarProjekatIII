@@ -5,6 +5,10 @@ GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnAllBorbeniBrod
 
 ###
 
+GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnBorbeniBrodById/{{idBorbeniBrod}}
+
+###
+
 POST {{WebAPI_HostAddress}}/BorbeniBrod/AddBorbeniBrod
 Content-Type: application/json
 
@@ -31,10 +35,7 @@ Content-Type: application/json
 }
 
 ###
-GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnBorbeniBrodById/{{idBorbeniBrod}}
-
-###
-//1143
+1143
 DELETE {{WebAPI_HostAddress}}/BorbeniBrod/DeleteBorbeniBrod/{{idBorbeniBrod}}
 
 ###

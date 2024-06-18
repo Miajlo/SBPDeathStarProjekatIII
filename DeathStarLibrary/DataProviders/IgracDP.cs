@@ -43,7 +43,15 @@ public static class IgracDP
             {
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
-            
+
+            Savez savez = new()
+            {
+                Naziv=$"{p.LIme}Savez",
+                DatumFormiranja = DateTime.Now,
+            };
+
+            await s.SaveAsync(savez);
+            await s.FlushAsync();
             Igrac o = new()
             {
                 KorisnickoIme = p.KorisnickoIme,
@@ -57,6 +65,7 @@ public static class IgracDP
                 Drzava = p.Drzava,
                 Opis = p.Opis,
                 Slika = p.Slika,
+                Savez = savez,
             };
 
             await s.SaveOrUpdateAsync(o);
@@ -88,6 +97,17 @@ public static class IgracDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             Igrac igrac = s.Load<Igrac>(p.IgracID);
+            if (igrac == null)
+                return "Ne postoji trazeni igrac".ToError(404);
+
+            if(p!.Savez != null && p!.Savez!.SavezID != igrac!.Savez!.SavezID)
+            {
+                var savez = await s.GetAsync<Savez>(p!.Savez!.SavezID);
+                if (savez == null)
+                    return "Ne postoji trazeni savez".ToError(404);
+                igrac.Savez = savez;
+            }
+
             igrac.KorisnickoIme = p.KorisnickoIme;
             igrac.DatumOtvaranjaNaloga = p.DatumOtvaranjaNaloga;
             igrac.LIme = p.LIme;

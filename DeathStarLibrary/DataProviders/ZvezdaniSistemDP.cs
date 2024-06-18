@@ -1,4 +1,5 @@
-﻿using NHibernate.Linq;
+﻿using DeathStarLibrary.Entiteti;
+using NHibernate.Mapping.ByCode;
 
 namespace DeathStarLibrary.DataProviders;
 
@@ -119,10 +120,10 @@ public static class ZvezdaniSistemDP
         return zvezdaniSistemi;
     }
 
-    public async static Task<Result<int, ErrorMessage>> AddZvezdaniSistemAsync(ZvezdaniSistemView p)
+    public async static Task<Result<bool, ErrorMessage>> AddZvezdaniSistemAsync(ZvezdaniSistemView p)
     {
         ISession? s = null;
-        int zSID = 0;
+        
         try
         {
             s = DataLayer.GetSession();
@@ -132,19 +133,100 @@ public static class ZvezdaniSistemDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
-            ZvezdaniSistem o = new()
-            { 
+            if (p.ZvezdaSistema == null)
+                return "Nema zvezde za dodavanje".ToError(400);
 
-            };
+            if (p.PlanetaSistema == null)
+                return "Nema planete za dodavanje".ToError(404);
 
+
+            var zvezda = await s.GetAsync<Zvezda>(p!.ZvezdaSistema!.ZvezdaID);
+
+            if (zvezda == null)
+                return "Ne postoji trazena zvezda".ToError(404);
+
+            var planeta = await s.GetAsync<Planeta>(p!.PlanetaSistema!.PlanetaID);
+
+            if (planeta == null)
+                return "Ne postoji trazena planeta".ToError(404);
+
+            var zvezdaVeze = await s.Query<ZvezdaniSistem>()
+                                    .Where(zs => zs!.ID!.ZvezdaSistema!.ZvezdaID
+                                              == p.ZvezdaSistema.ZvezdaID)
+                                    .ToListAsync();
+
+            var planetaVeze = await s.Query<ZvezdaniSistem>()
+                                     .Where(zs => zs!.ID!.PlanetaSistema!.PlanetaID
+                                               == p!.PlanetaSistema!.PlanetaID)
+                                     .ToListAsync();
+
+            if ((planetaVeze.Count > 0 && zvezdaVeze.Count > 0))
+                return "Nije moguce kreiranje date veze: planeta i zvezda su vec u sistemu"
+                       .ToError(400);
+
+            if(planetaVeze.Count == 0 && zvezdaVeze.Count > 0)
+            {
+                var helper = zvezdaVeze[0].ID!.PlanetaSistema!.PlanetaID;
+                var zvezde = await s.Query<ZvezdaniSistem>()
+                                    .Where(zs => zs!.ID!.PlanetaSistema!.PlanetaID == helper)
+                                    .ToListAsync();
+
+                foreach(var z in zvezde)
+                {
+                    ZvezdaniSistem zs = new()
+                    {
+                        ID = new()
+                        {
+                            ZvezdaSistema = z.ID.ZvezdaSistema,
+                            PlanetaSistema = planeta
+                        }
+                    };
+                    await s.SaveAsync(zs);
+                }
+            }
+
+            else if (zvezdaVeze.Count == 0 && planetaVeze.Count > 0)
+            {
+                var helper = planetaVeze[0].ID!.ZvezdaSistema!.ZvezdaID;
+
+                var planete = await s.Query<ZvezdaniSistem>()
+                                    .Where(zs => zs!.ID!.ZvezdaSistema!.ZvezdaID == helper)
+                                    .ToListAsync();
+
+                foreach (var z in planete)
+                {
+                    ZvezdaniSistem zs = new()
+                    {
+                        ID = new()
+                        {
+                            ZvezdaSistema = zvezda,
+                            PlanetaSistema = z.ID.PlanetaSistema
+                        }
+                    };
+                    await s.SaveAsync(zs);
+                }
+            }
+            else
+            {
+                ZvezdaniSistem o = new()
+                {
+                    ID = new()
+                    {
+                        ZvezdaSistema = zvezda,
+                        PlanetaSistema = planeta
+                    }
+                };
+
+
+                await s.SaveOrUpdateAsync(o);
+                await s.FlushAsync();
+            }
             
-            await s.SaveOrUpdateAsync(o);
-            zSID = o.ZvezdaniSistemID;
             await s.FlushAsync();
         }
         catch (Exception)
         {
-            return GetError("Nemoguće dodati pojavu.", 404);
+            return GetError("Nemoguće dodati zvezdani sistem.", 404);
         }
         finally
         {
@@ -152,7 +234,7 @@ public static class ZvezdaniSistemDP
             s?.Dispose();
         }
 
-        return zSID;
+        return true;
     }
 
     public async static Task<Result<ZvezdaniSistemView, ErrorMessage>> UpdateZvezdaniSistemAsync(ZvezdaniSistemView p)

@@ -1,7 +1,11 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idIgrac = 1143
+@idIgrac = 181
 
 GET {{WebAPI_HostAddress}}/Igrac/ReturnAllIgrac
+
+###
+
+GET {{WebAPI_HostAddress}}/Igrac/ReturnIgracById/{{idIgrac}}
 
 ###
 
@@ -9,9 +13,17 @@ POST {{WebAPI_HostAddress}}/Igrac/AddIgrac
 Content-Type: application/json
 
 {
-    "IgracID":"0",
-    "naziv": "Prophet Alliance",
-    "datumformiranja": "2024-05-19T23:06:35"
+    "korisnickoIme": "QueenFrontman",
+    "datumOtvaranjaNaloga": "1970-09-05T23:06:35",
+    "lIme": "Freddie",
+    "prezime": "Mercury",
+    "sSlovo": "M",
+    "email": "freddiemercury@example.com",
+    "pol": "M",
+    "datumRodjenja": "2024-05-19T23:05:11",
+    "drzava": "Zanzibar",
+    "opis": "Seven seas of rhye",
+    "slika": "googledrive.freddie.profilnaslika"
 }
 
 ###
@@ -20,15 +32,20 @@ PATCH {{WebAPI_HostAddress}}/Igrac/UpdateIgrac
 Content-Type: application/json
 
 {
-   "IgracID": 1143,
-   "naziv": "Prophet Alliance",
-   "datumFormiranja": "2024-05-19T23:06:35"
+    "IgracID": 181,
+    "korisnickoIme": "QueenFrontman",
+    "datumOtvaranjaNaloga": "1970-09-05T23:06:35",
+    "lIme": "Freddie",
+    "prezime": "Mercury",
+    "sSlovo": "M",
+    "email": "freddiemercury@example.com",
+    "pol": "M",
+    "datumRodjenja": "1946-09-05T23:05:11",
+    "drzava": "Zanzibar",
+    "opis": "Seven seas of rhye",
+    "slika": "googledrive.freddie.profilnaslika"
 
 }
-
-###
-GET {{WebAPI_HostAddress}}/Igrac/ReturnIgracById/{{idIgrac}}
-
 ###
 //1143
 DELETE {{WebAPI_HostAddress}}/Igrac/DeleteIgrac/{{idIgrac}}

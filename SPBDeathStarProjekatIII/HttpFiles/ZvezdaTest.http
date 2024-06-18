@@ -9,9 +9,8 @@ POST {{WebAPI_HostAddress}}/Zvezda/AddZvezda
 Content-Type: application/json
 
 {
-    "ZvezdaID":"0",
     "naziv": "Prophet Alliance",
-    "datumformiranja": "2024-05-19T23:06:35"
+    "Tip": "Red supergiant"
 }
 
 ###

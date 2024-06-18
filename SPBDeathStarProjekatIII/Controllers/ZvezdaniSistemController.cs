@@ -78,7 +78,7 @@ public class ZvezdaniSistemController : ControllerBase
             return StatusCode(error?.StatusCode ?? 400, error?.Message);
         }
 
-        if (zsID != 0)
+        if (zsID)
         {
             var response = new
             {
@@ -89,7 +89,7 @@ public class ZvezdaniSistemController : ControllerBase
         }
         else
         {
-            return BadRequest("Neuspešan upis ZvezdaniSistema.");
+            return BadRequest("Neuspešan upis Zvezdanog Sistema.");
         }
     }
 

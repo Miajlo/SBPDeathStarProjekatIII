@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DataProviders;
+﻿using DeathStarLibrary.Entiteti;
+
+namespace DeathStarLibrary.DataProviders;
 
 public static class GalaksijaDP
 {
@@ -43,12 +45,17 @@ public static class GalaksijaDP
             {
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
+            Rasa? rasa = null;
+
+            if (p!.DominantnaRasa! != null)
+                rasa = await s.GetAsync<Rasa>(p!.DominantnaRasa!.RasaID);
 
             Galaksija o = new()
             {
                 Naziv = p.Naziv,
                 BrojPlaneta = p.BrojPlaneta,
                 BrojZvezda = p.BrojZvezda,
+                DominantnaRasa = rasa
             };
 
             await s.SaveOrUpdateAsync(o);
@@ -80,6 +87,22 @@ public static class GalaksijaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             Galaksija galaksija = s.Load<Galaksija>(p.GalaksijaID);
+
+            if (galaksija == null)
+                return "Ne postoji trazena galaksija".ToError(404);
+
+
+
+            if (p!.DominantnaRasa != null 
+                && p!.DominantnaRasa!.RasaID! != galaksija!.DominantnaRasa!.RasaID)
+            {
+                var rasa = await s.GetAsync<Rasa>(p!.DominantnaRasa!.RasaID);
+                if (rasa == null)
+                    return "Ne postoji trazena planeta".ToError(400);
+                galaksija.DominantnaRasa = rasa;
+            }
+
+
             galaksija.Naziv = p.Naziv;
             galaksija.BrojPlaneta = p.BrojPlaneta;
             galaksija.BrojZvezda = p.BrojZvezda;
