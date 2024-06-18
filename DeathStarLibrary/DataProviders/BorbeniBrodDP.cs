@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DataProviders;
+﻿using System.Collections.Specialized;
+
+namespace DeathStarLibrary.DataProviders;
 
 public static class BorbeniBrodDP
 {
@@ -105,27 +107,43 @@ public static class BorbeniBrodDP
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
-                BorbeniBrod brod = s.Load<BorbeniBrod>(p.BrodID);
 
-                if (brod == null)
-                    return "Borbeni brod sa datim ID-om ne postoji.".ToError(404); 
-                brod.Naziv = p.Naziv;
-                brod.MaxBrzina = p.MaxBrzina;
-                brod.BrojTopova = p.BrojTopova;
-                brod.PosedujeFotTorp = p.PosedujeFotTorp;
-                brod.Tip = p.Tip;
-                await s.UpdateAsync(brod);
-                await s.FlushAsync();
-            }
-            catch (Exception)
-            {
-                return "Nemoguće ažurirati borbeni brod.".ToError(400);
-            }
-            finally
-            {
-                s?.Close();
-                s?.Dispose();
-            }
+            Brod b = await s.LoadAsync<Brod>(p.BrodID);
+
+            if (b == null)
+                return "Trazeni brod ne postoji!".ToError(404);
+
+            BorbeniBrod brod = await s.LoadAsync<BorbeniBrod>(p.BrodID);
+
+            if (brod == null)
+                return "Borbeni brod sa datim ID-om ne postoji.".ToError(404);
+
+
+            if (b.Savez != null && b!.Savez!.SavezID != p!.Savez!.SavezID)
+                b.Savez = await s.GetAsync<Savez>(p!.Savez!.SavezID);
+
+            if (b.Planeta != null && b!.Planeta!.PlanetaID != p!.Planeta!.PlanetaID)
+                b.Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
+            await s.SaveAsync(b);
+
+            brod.Naziv = p.Naziv;
+            brod.MaxBrzina = p.MaxBrzina;
+            brod.BrojTopova = p.BrojTopova;
+            brod.PosedujeFotTorp = p.PosedujeFotTorp;
+            brod.Tip = p.Tip;
+            await s.UpdateAsync(brod);
+            await s.FlushAsync();
+        }
+        catch (Exception)
+        {
+            return "Nemoguće ažurirati borbeni brod.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
 
         return p;
     }
@@ -174,6 +192,10 @@ public static class BorbeniBrodDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             Brod brod = await s.LoadAsync<Brod>(id);
+
+            if (brod == null)
+                return "Ne postoji trazeni brod".ToError();
+
             await s.DeleteAsync(brod);
 
             BorbeniBrod o = await s.LoadAsync<BorbeniBrod>(id);

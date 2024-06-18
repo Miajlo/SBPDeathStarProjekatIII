@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DataProviders;
+﻿using DeathStarLibrary.DTOs;
+
+namespace DeathStarLibrary.DataProviders;
 public static class TransportniBrodDP
 {
     public async static Task<Result<List<TransportniBrodView>, ErrorMessage>> ReturnAllTBrod()
@@ -17,6 +19,19 @@ public static class TransportniBrodDP
 
             tbrodovi = (await s.QueryOver<TransportniBrod>().ListAsync())
                       .Select(p => new TransportniBrodView(p)).ToList();
+
+            foreach (var tb in tbrodovi)
+            {
+                var brod = await s.GetAsync<Brod>(tb.BrodID);
+                if (brod != null)
+                {
+                    tb.Naziv = brod.Naziv;
+                    tb.Savez = new(brod!.Savez!);
+                    tb.Planeta = new(brod!.Planeta!);
+                    tb.MaxBrzina = brod.MaxBrzina;
+                }
+            }
+
         }
         catch (Exception)
         {
@@ -43,9 +58,19 @@ public static class TransportniBrodDP
             {
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
+            Brod brod = new()
+            {
+                Naziv = p!.Naziv,
+                MaxBrzina = p.MaxBrzina,
+                Savez = await s.GetAsync<Savez>(p!.Savez!.SavezID),
+                Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID)
+            };
+
+            int tbID = (int)await s.SaveAsync(brod);           
 
             TransportniBrodView o = new()
             {
+                BrodID = tbID,
                 Naziv = p.Naziv,
                 MaxBrzina = p.MaxBrzina,
                 Nosivost = p.Nosivost,
@@ -79,8 +104,25 @@ public static class TransportniBrodDP
 
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
+            Brod b = await s.LoadAsync<Brod>(p.BrodID);
 
-                TransportniBrod brod = s.Load<TransportniBrod>(p.BrodID);
+            if (b == null)
+                return "Trazeni brod ne postoji!".ToError(404);
+
+            TransportniBrod brod = s.Load<TransportniBrod>(p.BrodID);
+
+            if (brod == null)
+                return "Borbeni brod sa datim ID-om ne postoji.".ToError(404);
+
+
+            if (b.Savez != null && b!.Savez!.SavezID != p!.Savez!.SavezID)
+                b.Savez = await s.GetAsync<Savez>(p!.Savez!.SavezID);
+
+            if (b.Planeta != null && b!.Planeta!.PlanetaID != p!.Planeta!.PlanetaID)
+                b.Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
+            await s.SaveAsync(b);
+           
                 if (brod == null)
                     return "Transportni brod sa datim ID-om ne postoji.".ToError(404);
                 brod.Naziv = p.Naziv;
@@ -118,6 +160,9 @@ public static class TransportniBrodDP
 
             TransportniBrod o = await s.LoadAsync<TransportniBrod>(id);
             tbrodView = new TransportniBrodView(o);
+            var brod = await s.GetAsync<Brod>(tbrodView.BrodID);
+            tbrodView.Savez = new(brod!.Savez!);
+            tbrodView.Planeta = new(brod!.Planeta!);
         }
         catch (Exception)
         {
@@ -142,6 +187,14 @@ public static class TransportniBrodDP
 
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
+
+            Brod brod = await s.LoadAsync<Brod>(id);
+
+            if (brod == null)
+                return "Ne postoji trazeni brod".ToError(404);
+
+            await s.DeleteAsync(brod);
+
 
             TransportniBrod o = await s.LoadAsync<TransportniBrod>(id);
 
