@@ -295,7 +295,7 @@ public static class ZvezdaniSistemDP
         return ZvezdaniSistemView;
     }
 
-    public async static Task<Result<bool, ErrorMessage>> DeleteZvezdaniSistemAsync(int id)
+    public async static Task<Result<bool, ErrorMessage>> DeleteZvezdaConnections(int zvezdaID)
     {
         ISession? s = null;
 
@@ -306,9 +306,66 @@ public static class ZvezdaniSistemDP
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
-            ZvezdaniSistem o = await s.LoadAsync<ZvezdaniSistem>(id);
+            var zvezda = await s.GetAsync<Zvezda>(zvezdaID);
 
-            await s.DeleteAsync(o);
+            if (zvezda == null)
+                return "Ne postoji trazena zvezda".ToError(404);
+
+            zvezda= null;
+
+            var zvezdaVeze = await s.Query<ZvezdaniSistem>()
+                                    .Where(zs => zs!.ID!.ZvezdaSistema!.ZvezdaID == zvezdaID)
+                                    .ToListAsync();
+
+            if (zvezdaVeze == null || zvezdaVeze.Count == 0)
+                return "Trazena zvezda nije nu u jednom sistemu".ToError(400);
+
+            foreach(var z in zvezdaVeze)
+                await s.DeleteAsync(z);
+                
+            await s.FlushAsync();
+        }
+        catch (Exception)
+        {
+            return "Nemoguće obrisati zvezdani sistem.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
+
+        return true;
+    }
+
+    public async static Task<Result<bool, ErrorMessage>> DeletePlanetaConnections(int planetaID)
+    {
+        ISession? s = null;
+
+        try
+        {
+            s = DataLayer.GetSession();
+
+            if (!(s?.IsConnected ?? false))
+                return "Nemoguće otvoriti sesiju.".ToError(403);
+
+            var planeta = await s.GetAsync<Planeta>(planetaID);
+
+            if (planeta == null)
+                return "Ne postoji trazena zvezda".ToError(404);
+
+            planeta= null;
+
+            var planetaVeze = await s.Query<ZvezdaniSistem>()
+                                    .Where(zs => zs!.ID!.PlanetaSistema!.PlanetaID == planetaID)
+                                    .ToListAsync();
+
+            if (planetaVeze == null || planetaVeze.Count == 0)
+                return "Trazena planeta nije nu u jednom sistemu".ToError(400);
+
+            foreach (var z in planetaVeze)
+                await s.DeleteAsync(z);
+
             await s.FlushAsync();
         }
         catch (Exception)

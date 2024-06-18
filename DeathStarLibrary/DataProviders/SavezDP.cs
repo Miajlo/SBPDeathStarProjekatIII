@@ -90,8 +90,21 @@ public static class SavezDP
             if (sv == null)
                 return "Savez sa datim ID-om ne postoji.".ToError(404);
 
+
+            Savez? nadSavez = null;
+
+            if(p!.NadSavez != null && p!.NadSavez!.SavezID != sv!.NadSavez!.SavezID)
+            {
+                var helper = await s.GetAsync<Savez>(p!.NadSavez!.SavezID);
+
+                if (helper == null)
+                    return "Ne postoji traznei nadSavez".ToError(400);
+                nadSavez = helper;
+            }
+
             sv.Naziv = p.Naziv;
             sv.DatumFormiranja = p.DatumFormiranja;
+            sv.NadSavez = nadSavez;
             await s.UpdateAsync(sv);
             await s.FlushAsync();
         }

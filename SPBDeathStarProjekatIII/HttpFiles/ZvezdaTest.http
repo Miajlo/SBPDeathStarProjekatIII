@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idZvezda = 10
+@idZvezda = 205
 
 GET {{WebAPI_HostAddress}}/Zvezda/ReturnAllZvezda
 
@@ -19,9 +19,8 @@ PATCH {{WebAPI_HostAddress}}/Zvezda/UpdateZvezda
 Content-Type: application/json
 
 {
-   "ZvezdaID": 1143,
    "naziv": "Prophet Alliance",
-   "Tip": ""
+   "Tip": "Red hypergiant"
 
 }
 

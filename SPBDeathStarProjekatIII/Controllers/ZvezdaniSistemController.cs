@@ -112,13 +112,13 @@ public class ZvezdaniSistemController : ControllerBase
 
 
 
-    [HttpDelete("deleteZvezdaniSistem/{ZvezdaniSistemID}")]
+    [HttpDelete("deleteZvezdaFromSystem/{zvezdaID}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult> DeleteZvezdaniSistem(int zvezdaniSistemID)
+    public async Task<ActionResult> DeleteZvezdaFromSystem(int zvezdaID)
     {
-        var data = await ZvezdaniSistemDP.DeleteZvezdaniSistemAsync(zvezdaniSistemID);
+        var data = await ZvezdaniSistemDP.DeleteZvezdaConnections(zvezdaID);
 
         if (data.IsError)
         {
@@ -127,8 +127,30 @@ public class ZvezdaniSistemController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno brisanje zvezdanog sistema",
-            ZvezdaniSistemID = zvezdaniSistemID
+            message = "Uspesno brisanje zvezde iz zvezdanog sistema",
+            ZvezdaID = zvezdaID
+        };
+
+        return Ok(response);
+    }
+
+    [HttpDelete("deletePlanetaFromSystem/{planetaID}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<ActionResult> DeletePlanetaFromSystem(int planetaID)
+    {
+        var data = await ZvezdaniSistemDP.DeletePlanetaConnections(planetaID);
+
+        if (data.IsError)
+        {
+            return StatusCode(data.Error.StatusCode, data.Error.Message);
+        }
+
+        var response = new
+        {
+            message = "Uspesno brisanje planete iz zvezdanog sistema",
+            PlanetaID = planetaID
         };
 
         return Ok(response);

@@ -1,0 +1,33 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idRasa = 140
+
+GET {{WebAPI_HostAddress}}/Rasa/ReturnAllRasa
+
+###
+
+GET {{WebAPI_HostAddress}}/Rasa/ReturnRasaById/{{idRasa}}
+
+###
+
+POST {{WebAPI_HostAddress}}/Rasa/AddRasa
+Content-Type: application/json
+
+{
+    "naziv": "Allicorn"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Rasa/UpdateRasa
+Content-Type: application/json
+
+{
+    "naziv": "Roboti"
+}
+
+
+###
+
+DELETE {{WebAPI_HostAddress}}/Rasa/DeleteRasa/{{idRasa}}
+
+###

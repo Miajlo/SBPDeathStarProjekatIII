@@ -1,31 +1,42 @@
 @WebAPI_HostAddress = https://localhost:7234
 @idZvezdaniSistem = 1143
+@idZvezda = 204
+@idPlaneta = 1060
 
 GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnAllZvezdaniSistem
 
+###
+
+GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnZvezdaniSistemByZvezdaId/{{idZvezda}}
+
+###
+
+GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnZvezdaniSistemByPlanetaId/{{idPlaneta}}
+
+###
+
+GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnZvezdaniSistemById/{{idZvezdaniSistem}}
 ###
 
 POST {{WebAPI_HostAddress}}/ZvezdaniSistem/AddZvezdaniSistem
 Content-Type: application/json
 
 {
- 
+    "PlanetaSistema":{
+        "PlanetaID":1060
+    },
+    "ZvezdaSistema": {
+        "ZvezdaID":204
+    }
 }
 
-###
-
-PATCH {{WebAPI_HostAddress}}/ZvezdaniSistem/UpdateZvezdaniSistem
-Content-Type: application/json
-
-{
-   "ZvezdaniSistemID": 1143,
-}
-
-###
-GET {{WebAPI_HostAddress}}/ZvezdaniSistem/ReturnZvezdaniSistemById/{{idZvezdaniSistem}}
 
 ###
 //1143
-DELETE {{WebAPI_HostAddress}}/ZvezdaniSistem/DeleteZvezdaniSistem/{{idZvezdaniSistem}}
+DELETE {{WebAPI_HostAddress}}/ZvezdaniSistem/deleteZvezdaFromSystem/{{idZvezda}}
+
+###
+
+DELETE {{WebAPI_HostAddress}}/ZvezdaniSistem/deletePlanetaFromSystem/{{idPlaneta}}
 
 ###
