@@ -95,7 +95,7 @@ public class PlanetaController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno brisanje zvezde",
+            message = "Uspesno brisanje planete",
             PlanetaID = planetaID
         };
 

@@ -101,7 +101,7 @@ public class RasaController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno dodavanje zvezde",
+            message = "Uspesno brisanje rase",
             RasaID = rasaID
         };
 

@@ -60,7 +60,7 @@ public class TransportniBrodController : ControllerBase
         }
         else
         {
-            return BadRequest("Neuspešan upis odeljenja.");
+            return BadRequest("Neuspešan upis transportnog broda.");
         }
     }
 
@@ -79,7 +79,7 @@ public class TransportniBrodController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno ayuriranje transportnog broda",
+            message = "Uspesno azuriranje transportnog broda",
             BrodID = transportniBrod.BrodID
         };
 
@@ -105,6 +105,6 @@ public class TransportniBrodController : ControllerBase
             BrodID = transportniBrodID
         };
 
-        return Ok($"Izbrisana TransportniBrod, sa ID: {transportniBrodID}");
+        return Ok($"Izbrisan TransportniBrod, sa ID: {transportniBrodID}");
     }
 }
