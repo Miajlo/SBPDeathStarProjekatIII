@@ -255,7 +255,7 @@ public static class ZvezdaniSistemDP
         }
         catch (Exception)
         {
-            return "Nemoguće ažurirati pojavu.".ToError(400);
+            return "Nemoguće ažurirati zvezdani sistem.".ToError(400);
         }
         finally
         {
@@ -313,7 +313,7 @@ public static class ZvezdaniSistemDP
         }
         catch (Exception)
         {
-            return "Nemoguće obrisati pojavu.".ToError(400);
+            return "Nemoguće obrisati zvezdani sistem.".ToError(400);
         }
         finally
         {
