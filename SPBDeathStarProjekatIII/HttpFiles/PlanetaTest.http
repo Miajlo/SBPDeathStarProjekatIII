@@ -1,7 +1,10 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idPlaneta = 141
+@idPlaneta = 1063
 
 GET {{WebAPI_HostAddress}}/Planeta/ReturnAllPlaneta
+###
+
+GET {{WebAPI_HostAddress}}/Planeta/ReturnPlanetaById/{{idPlaneta}}
 
 ###
 
@@ -9,8 +12,28 @@ POST {{WebAPI_HostAddress}}/Planeta/AddPlaneta
 Content-Type: application/json
 
 {
-    "naziv": "Prophet Alliance",
-    "Tip": "Red supergiant"
+      "naziv": "Trapist1B",
+      "x": 234234234,
+      "y": -235235235,
+      "z": 252352523,
+      "brojStanovnika": 0,
+      "drustvenoUredjenje": "nema",
+      "plutonijumKol": 1,
+      "berilijumKol": 2,
+      "trilijumKol": 3,
+      "jeMaticna": "N",
+      "glavniGrad": {
+          "GradId":1
+      },
+      "galaksija": {
+        "galaksijaID": 1
+      },
+      "vlasnik": {
+        "igracID": 1
+      },
+      "dominantnaRasa": {
+        "rasaID": 1
+      }
 }
 
 ###
@@ -19,13 +42,31 @@ PATCH {{WebAPI_HostAddress}}/Planeta/UpdatePlaneta
 Content-Type: application/json
 
 {
-   "naziv": "Prophet Alliance",
-   "Tip": "Red hypergiant"
+    "PlanetaID":1063,
+    "naziv": "Trapist1B",
+      "x": 234234234,
+      "y": -235235235,
+      "z": 252352523,
+      "brojStanovnika": 1,
+      "drustvenoUredjenje": "Samoca",
+      "plutonijumKol": 1,
+      "berilijumKol": 2,
+      "trilijumKol": 3,
+      "jeMaticna": "N",
+      "glavniGrad": {
+          "GradId":1
+      },
+      "galaksija": {
+        "galaksijaID": 1
+      },
+      "vlasnik": {
+        "igracID": 1
+      },
+      "dominantnaRasa": {
+        "rasaID": 1
+      }
 
 }
-
-###
-GET {{WebAPI_HostAddress}}/Planeta/ReturnPlanetaById/{{idPlaneta}}
 
 ###
 //1143

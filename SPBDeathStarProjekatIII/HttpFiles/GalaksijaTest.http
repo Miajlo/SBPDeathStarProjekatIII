@@ -1,0 +1,43 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idGalaksija = 62
+
+GET {{WebAPI_HostAddress}}/Galaksija/ReturnAllGalaksija
+
+###
+
+GET {{WebAPI_HostAddress}}/Galaksija/ReturnGalaksijaById/{{idGalaksija}}
+
+###
+POST {{WebAPI_HostAddress}}/Galaksija/AddGalaksija
+Content-Type: application/json
+
+{
+  "naziv": "Segue 2",
+  "brojZvezda": 1000,
+  "brojPlaneta": 1600,
+  "dominantnaRasa": {
+    "RasaID":5
+  }
+  
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Galaksija/UpdateGalaksija
+Content-Type: application/json
+
+{
+    "GalaksijaID":61,
+    "naziv": "Segue 2",
+    "brojZvezda": 1000,
+    "brojPlaneta": 1600,
+    "dominantnaRasa": {
+    "RasaID":4
+    }
+}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/Galaksija/DeleteGalaksija/{{idGalaksija}}
+
+###
