@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idGrad = 1
+@idGrad = 120
 
 GET {{WebAPI_HostAddress}}/Grad/ReturnAllGrad
 
@@ -22,8 +22,8 @@ PATCH {{WebAPI_HostAddress}}/Grad/UpdateGrad
 Content-Type: application/json
 
 {
-   "gradID": 1,
-   "naziv:" "Nis"
+   "gradID": 120,
+   "naziv": "Nis"
 }
 
 ###

@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idSirenjePoseda = 182
+@idSirenjePoseda = 123
 
 GET {{WebAPI_HostAddress}}/SirenjePoseda/ReturnAllSirenjePoseda
 
@@ -10,7 +10,13 @@ Content-Type: application/json
 
 {
     "tip": "Prostorija",
-    "datum": "2024-04-15T00:00:00"
+    "datum": "2024-04-15T00:00:00",
+    "savez":{
+      "savezID": 101
+    },
+    "prethodniVlasnik": {
+      "igracID": 1
+    }
 }
 
 ###
@@ -19,8 +25,8 @@ PATCH {{WebAPI_HostAddress}}/SirenjePoseda/UpdateSirenjePoseda
 Content-Type: application/json
 
 {
-   "spid": 180,
-   "tip": "Prostorija",
+   "spid": 123,
+   "tip": "Nesto",
    "datum": "2023-04-15T00:00:00"
 }
 

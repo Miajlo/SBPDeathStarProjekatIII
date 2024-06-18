@@ -60,7 +60,7 @@ public class BorbeniBrodController : ControllerBase
         }
         else
         {
-            return BadRequest(new { message = "Neuspešan upis odeljenja." });
+            return BadRequest(new { message = "Neuspešan upis borbenog broda." });
         }
     }
 

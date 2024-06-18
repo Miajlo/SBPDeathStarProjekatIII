@@ -46,10 +46,21 @@ public static class BrodDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Planeta? planeta = null;
+            Savez? savez = null;
+
+            if (p.Planeta != null && p.Planeta.PlanetaID > 0)
+                planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID);
+
+            if (p.Savez != null && p.Savez.SavezID > 0)
+                savez = await s.GetAsync<Savez>(p!.Savez!.SavezID);
+
             Brod o = new()
             {
                 Naziv = p.Naziv,
-                MaxBrzina = p.MaxBrzina
+                MaxBrzina = p.MaxBrzina,
+                Planeta=planeta,
+                Savez=savez
             };
 
             await s.SaveOrUpdateAsync(o);

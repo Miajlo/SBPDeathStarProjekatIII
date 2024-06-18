@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idBorbeniBrod = 162
+@idBorbeniBrod = 163
 
 GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnAllBorbeniBrod
 
@@ -32,11 +32,11 @@ PATCH {{WebAPI_HostAddress}}/BorbeniBrod/UpdateBorbeniBrod
 Content-Type: application/json
 
 {
-   "brodID": 117,
+   "brodID": 163,
    "brojTopova": 1,
-   "posedujeFotTorp": "N",
+   "posedujeFotTorp": "Y",
    "tip": "Krstarica",
-   "naziv": "Brodic",
+   "naziv": "Brodiccc",
    "maxBrzina": 0
 }
 

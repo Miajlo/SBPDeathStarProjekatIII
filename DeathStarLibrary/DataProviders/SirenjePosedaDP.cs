@@ -1,4 +1,6 @@
-﻿namespace DeathStarLibrary.DataProviders;
+﻿using DeathStarLibrary.Entiteti;
+
+namespace DeathStarLibrary.DataProviders;
 
 public static class SirenjePosedaDP
 {
@@ -45,10 +47,21 @@ public static class SirenjePosedaDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Igrac? igrac = null;
+            Savez? savez = null;
+
+            if (p.PrethodniVlasnik != null && p.PrethodniVlasnik.IgracID > 0)
+                igrac = await s.GetAsync<Igrac>(p!.PrethodniVlasnik!.IgracID);
+
+            if (p.Savez != null && p.Savez.SavezID > 0)
+                savez = await s.GetAsync<Savez>(p!.Savez!.SavezID);
+
             SirenjePoseda o = new()
             {
                 Tip = p.Tip,
-                Datum = p.Datum
+                Datum = p.Datum,
+                PrethodniVlasnik=igrac,
+                Savez=savez
             };
 
             await s.SaveOrUpdateAsync(o);

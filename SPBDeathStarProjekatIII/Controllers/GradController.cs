@@ -79,7 +79,7 @@ public class GradController : ControllerBase
 
         var response = new
         {
-            message = "Uspesno dodavanje zvezde",
+            message = "Uspesno azuriranje grada",
             GradID = grad.GradID
         };
 

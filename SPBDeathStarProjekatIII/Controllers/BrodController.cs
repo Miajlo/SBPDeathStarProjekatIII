@@ -78,7 +78,7 @@ public class BrodController : ControllerBase
         }
         var response = new
         {
-            message = "Uspesno azuriranje borbenog broda",
+            message = "Uspesno azuriranje broda",
             BrodID = brod.BrodID
         };
         return Ok(response);
@@ -97,6 +97,6 @@ public class BrodController : ControllerBase
             return StatusCode(data.Error.StatusCode, data.Error.Message);
         }
 
-        return Ok($"Izbrisana Brod, sa ID: {brodID}");
+        return Ok($"Izbrisan Brod, sa ID: {brodID}");
     }
 }
