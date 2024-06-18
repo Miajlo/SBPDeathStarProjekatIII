@@ -1,18 +1,29 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idTransportniBrod = 182
+@idTransportniBrod = 176
 
 GET {{WebAPI_HostAddress}}/TransportniBrod/ReturnAllTransportniBrod
 
 ###
 
+GET {{WebAPI_HostAddress}}/TransportniBrod/ReturnTransportniBrodById/{{idTransportniBrod}}
+
+
+###
 POST {{WebAPI_HostAddress}}/TransportniBrod/AddTransportniBrod
 Content-Type: application/json
 
 {
-    "nosivost": 10000,
-    "zastita": "n",
-    "naziv": null,
-    "maxBrzina": 0
+    "nosivost": 15460,
+    "zastita": "N",
+    "naziv": "Galkticus expess",
+    "maxBrzina": 1000,
+    "Savez": {
+        "SavezId":101
+    },
+    "Planeta": {
+        "PlanetaId":1
+    }
+
 }
 
 ###
@@ -21,16 +32,17 @@ PATCH {{WebAPI_HostAddress}}/TransportniBrod/UpdateTransportniBrod
 Content-Type: application/json
 
 {
-   "brodID" : 102,
-   "nosivost": 10000,
-    "zastita": "y",
-    "naziv": null,
-    "maxBrzina": 0
+    "nosivost": 15460,
+    "zastita": "N",
+    "naziv": "Brodus Maximus",
+    "maxBrzina": 1000,
+    "Savez": {
+        "SavezId":101
+    },
+    "Planeta": {
+        "PlanetaId":1
+    }
 }
-
-###
-GET {{WebAPI_HostAddress}}/TransportniBrod/ReturnTransportniBrodById/{{idTransportniBrod}}
-
 ###
 DELETE {{WebAPI_HostAddress}}/TransportniBrod/DeleteTransportniBrod/{{idTransportniBrod}}
 

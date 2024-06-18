@@ -161,9 +161,11 @@ public static class BorbeniBrodDP
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
-            BorbeniBrod o = await s.LoadAsync<BorbeniBrod>(id);
+            var o = await s.LoadAsync<BorbeniBrod>(id);
             bbrodView = new BorbeniBrodView(o);
             var brod = await s.GetAsync<Brod>(bbrodView.BrodID);
+            bbrodView.Naziv = brod.Naziv;
+            bbrodView.MaxBrzina = brod.MaxBrzina;
             bbrodView.Savez = new(brod!.Savez!);
             bbrodView.Planeta = new(brod!.Planeta!);
         }

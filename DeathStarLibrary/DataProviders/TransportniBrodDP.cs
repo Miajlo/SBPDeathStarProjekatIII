@@ -62,13 +62,14 @@ public static class TransportniBrodDP
             {
                 Naziv = p!.Naziv,
                 MaxBrzina = p.MaxBrzina,
+                Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID),
                 Savez = await s.GetAsync<Savez>(p!.Savez!.SavezID),
-                Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID)
+               
             };
 
             int tbID = (int)await s.SaveAsync(brod);           
 
-            TransportniBrodView o = new()
+            TransportniBrod o = new()
             {
                 BrodID = tbID,
                 Naziv = p.Naziv,
@@ -123,24 +124,24 @@ public static class TransportniBrodDP
 
             await s.SaveAsync(b);
            
-                if (brod == null)
-                    return "Transportni brod sa datim ID-om ne postoji.".ToError(404);
-                brod.Naziv = p.Naziv;
-                brod.MaxBrzina = p.MaxBrzina;
-                brod.Zastita = p.Zastita;
-                brod.Nosivost = p.Nosivost;
-                await s.UpdateAsync(brod);
-                await s.FlushAsync();
-            }
-            catch (Exception)
-            {
-                return "Nemoguće ažurirati transportni brod.".ToError(400);
-            }
-            finally
-            {
-                s?.Close();
-                s?.Dispose();
-            }
+            if (brod == null)
+                return "Transportni brod sa datim ID-om ne postoji.".ToError(404);
+            brod.Naziv = p.Naziv;
+            brod.MaxBrzina = p.MaxBrzina;
+            brod.Zastita = p.Zastita;
+            brod.Nosivost = p.Nosivost;
+            await s.UpdateAsync(brod);
+            await s.FlushAsync();
+        }
+        catch (Exception)
+        {
+            return "Nemoguće ažurirati transportni brod.".ToError(400);
+        }
+        finally
+        {
+            s?.Close();
+            s?.Dispose();
+        }
 
         return p;
     }
@@ -158,9 +159,11 @@ public static class TransportniBrodDP
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
-            TransportniBrod o = await s.LoadAsync<TransportniBrod>(id);
+            var o = await s.LoadAsync<TransportniBrod>(id);
             tbrodView = new TransportniBrodView(o);
             var brod = await s.GetAsync<Brod>(tbrodView.BrodID);
+            tbrodView.Naziv = brod.Naziv;
+            tbrodView.MaxBrzina = brod.MaxBrzina;
             tbrodView.Savez = new(brod!.Savez!);
             tbrodView.Planeta = new(brod!.Planeta!);
         }
