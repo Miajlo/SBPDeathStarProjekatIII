@@ -80,12 +80,7 @@ public class ZvezdaniSistemController : ControllerBase
 
         if (zsID)
         {
-            var response = new
-            {
-                message = "Uspesno dodavanje zvezdanog sistema",
-                ZvezdaniSistemID = zsID
-            };
-            return StatusCode(201, response);
+            return StatusCode(201, "Uspesno dodavanje zvezdanog sistema");
         }
         else
         {
