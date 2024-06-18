@@ -23,10 +23,10 @@ Content-Type: application/json
 
 {
     "PlanetaSistema":{
-        "PlanetaID":1060
+        "PlanetaID":1047
     },
     "ZvezdaSistema": {
-        "ZvezdaID":204
+        "ZvezdaID":160
     }
 }
 

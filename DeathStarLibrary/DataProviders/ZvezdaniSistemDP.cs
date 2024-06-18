@@ -33,7 +33,8 @@ public static class ZvezdaniSistemDP
 
         return zvezdaniSistemi;
     }
-
+    private static readonly int[] planeteBrisanje = { 1, 2, 3, 4, 5, 1001, 1022, 1024, 1042, 1043, 1047 };
+    private static readonly int[] zvezdeBrisanje = { 1, 2, 140, 141, 160 };
     public async static Task<Result<List<ZvezdaniSistemView>,ErrorMessage>> ReturnSystemByZvezdaId(int zvezdaID)
     {
         ISession? s = null;
@@ -237,34 +238,34 @@ public static class ZvezdaniSistemDP
         return true;
     }
 
-    public async static Task<Result<ZvezdaniSistemView, ErrorMessage>> UpdateZvezdaniSistemAsync(ZvezdaniSistemView p)
-    {
-        ISession? s = null;
+    //public async static Task<Result<ZvezdaniSistemView, ErrorMessage>> UpdateZvezdaniSistemAsync(ZvezdaniSistemView p)
+    //{
+    //    ISession? s = null;
 
-        try
-        {
-            s = DataLayer.GetSession();
+    //    try
+    //    {
+    //        s = DataLayer.GetSession();
 
-            if (!(s?.IsConnected ?? false))
-                return "Nemoguće otvoriti sesiju.".ToError(403);
+    //        if (!(s?.IsConnected ?? false))
+    //            return "Nemoguće otvoriti sesiju.".ToError(403);
 
-            ZvezdaniSistem ZvezdaniSistem = s.Load<ZvezdaniSistem>(p.ZvezdaniSistemID);
+    //        ZvezdaniSistem ZvezdaniSistem = s.Load<ZvezdaniSistem>(p.ZvezdaniSistemID);
 
-            await s.UpdateAsync(ZvezdaniSistem);
-            await s.FlushAsync();
-        }
-        catch (Exception)
-        {
-            return "Nemoguće ažurirati zvezdani sistem.".ToError(400);
-        }
-        finally
-        {
-            s?.Close();
-            s?.Dispose();
-        }
+    //        await s.UpdateAsync(ZvezdaniSistem);
+    //        await s.FlushAsync();
+    //    }
+    //    catch (Exception)
+    //    {
+    //        return "Nemoguće ažurirati zvezdani sistem.".ToError(400);
+    //    }
+    //    finally
+    //    {
+    //        s?.Close();
+    //        s?.Dispose();
+    //    }
 
-        return p;
-    }
+    //    return p;
+    //}
 
     public async static Task<Result<ZvezdaniSistemView, ErrorMessage>> ReturnZvezdaniSistemAsync(int id)
     {
@@ -305,6 +306,9 @@ public static class ZvezdaniSistemDP
 
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
+
+            if (zvezdeBrisanje.Contains(zvezdaID))
+                return "Zabranjeno modifikovanje trazenog sistema".ToError(400);
 
             var zvezda = await s.GetAsync<Zvezda>(zvezdaID);
 
@@ -350,6 +354,9 @@ public static class ZvezdaniSistemDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
 
             var planeta = await s.GetAsync<Planeta>(planetaID);
+
+            if (planeteBrisanje.Contains(planetaID))
+                return "Zabranjeno modifikovanje trazenog sistema".ToError(400);
 
             if (planeta == null)
                 return "Ne postoji trazena zvezda".ToError(404);

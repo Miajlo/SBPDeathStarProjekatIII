@@ -88,29 +88,6 @@ public class ZvezdaniSistemController : ControllerBase
         }
     }
 
-    [HttpPatch("updateZvezdaniSistem")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    public async Task<ActionResult> UpdateZvezdaniSistem([FromBody] ZvezdaniSistemView zvezdaniSistem)
-    {
-        var data = await ZvezdaniSistemDP.UpdateZvezdaniSistemAsync(zvezdaniSistem);
-
-        if (data.IsError)
-        {
-            return StatusCode(data.Error.StatusCode, data.Error.Message);
-        }
-
-        var response = new
-        {
-            message = "Uspesno dodavanje zvezde",
-            ZvezdaniSistemID = zvezdaniSistem.ZvezdaniSistemID
-        };
-
-        return Ok(response);
-    }
-
-
 
     [HttpDelete("deleteZvezdaFromSystem/{zvezdaID}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

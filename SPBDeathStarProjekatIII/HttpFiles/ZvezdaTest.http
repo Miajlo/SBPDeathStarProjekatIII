@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idZvezda = 205
+@idZvezda = 141
 
 GET {{WebAPI_HostAddress}}/Zvezda/ReturnAllZvezda
 

@@ -1,0 +1,34 @@
+@WebAPI_HostAddress = https://localhost:7234
+@idPlaneta = 141
+
+GET {{WebAPI_HostAddress}}/Planeta/ReturnAllPlaneta
+
+###
+
+POST {{WebAPI_HostAddress}}/Planeta/AddPlaneta
+Content-Type: application/json
+
+{
+    "naziv": "Prophet Alliance",
+    "Tip": "Red supergiant"
+}
+
+###
+
+PATCH {{WebAPI_HostAddress}}/Planeta/UpdatePlaneta
+Content-Type: application/json
+
+{
+   "naziv": "Prophet Alliance",
+   "Tip": "Red hypergiant"
+
+}
+
+###
+GET {{WebAPI_HostAddress}}/Planeta/ReturnPlanetaById/{{idPlaneta}}
+
+###
+//1143
+DELETE {{WebAPI_HostAddress}}/Planeta/DeletePlaneta/{{idPlaneta}}
+
+###
