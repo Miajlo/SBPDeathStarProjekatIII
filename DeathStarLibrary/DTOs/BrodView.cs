@@ -20,6 +20,10 @@ public class BrodView
             BrodID = brod.BrodID;
             Naziv = brod.Naziv;
             MaxBrzina = brod.MaxBrzina;
+            if (brod!.Savez! != null)
+                Savez = new(brod.Savez);
+            if (brod!.Planeta! != null)
+                Planeta = new(brod.Planeta);
         }
     }
 }

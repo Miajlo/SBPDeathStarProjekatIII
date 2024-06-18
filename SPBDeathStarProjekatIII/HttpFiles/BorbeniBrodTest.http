@@ -1,5 +1,5 @@
 @WebAPI_HostAddress = https://localhost:7234
-@idBorbeniBrod = 117
+@idBorbeniBrod = 162
 
 GET {{WebAPI_HostAddress}}/BorbeniBrod/ReturnAllBorbeniBrod
 
@@ -17,7 +17,13 @@ Content-Type: application/json
     "posedujeFotTorp": "N",
     "tip": "Krstarica",
     "naziv": "Brodic",
-    "maxBrzina": 0
+    "maxBrzina": 0,
+    "Savez": {
+        "SavezId":101
+    },
+    "Planeta": {
+        "PlanetaId":1
+    }
 }
 
 ###
@@ -35,7 +41,7 @@ Content-Type: application/json
 }
 
 ###
-1143
+
 DELETE {{WebAPI_HostAddress}}/BorbeniBrod/DeleteBorbeniBrod/{{idBorbeniBrod}}
 
 ###

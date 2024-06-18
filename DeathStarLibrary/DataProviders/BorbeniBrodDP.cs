@@ -18,6 +18,18 @@ public static class BorbeniBrodDP
 
             bbrodovi = (await s.QueryOver<BorbeniBrod>().ListAsync())
                       .Select(p => new BorbeniBrodView(p)).ToList();
+
+            foreach (var bb in bbrodovi)
+            {
+                var brod = await s.GetAsync<Brod>(bb.BrodID);
+                if(brod != null)
+                {
+                    bb.Naziv = brod.Naziv;
+                    bb.Savez = new(brod!.Savez!);
+                    bb.Planeta = new(brod!.Planeta!);
+                    bb.MaxBrzina = brod.MaxBrzina;
+                }
+            }
         }
         catch (Exception)
         {
@@ -45,8 +57,19 @@ public static class BorbeniBrodDP
                 return "Nemoguće otvoriti sesiju.".ToError(403);
             }
 
+            Brod brod = new()
+            {
+                Naziv = p.Naziv,
+                MaxBrzina = p.MaxBrzina,
+                Planeta = await s.GetAsync<Planeta>(p!.Planeta!.PlanetaID),
+                Savez = await s.GetAsync<Savez>(p!.Savez!.SavezID),
+            };
+
+            int brodId = (int)await s.SaveAsync(brod);
+
             BorbeniBrod o = new()
             {
+                BrodID = brodId,
                 Naziv = p.Naziv,
                 MaxBrzina = p.MaxBrzina,
                 BrojTopova = p.BrojTopova,
@@ -122,6 +145,9 @@ public static class BorbeniBrodDP
 
             BorbeniBrod o = await s.LoadAsync<BorbeniBrod>(id);
             bbrodView = new BorbeniBrodView(o);
+            var brod = await s.GetAsync<Brod>(bbrodView.BrodID);
+            bbrodView.Savez = new(brod!.Savez!);
+            bbrodView.Planeta = new(brod!.Planeta!);
         }
         catch (Exception)
         {
@@ -146,6 +172,9 @@ public static class BorbeniBrodDP
 
             if (!(s?.IsConnected ?? false))
                 return "Nemoguće otvoriti sesiju.".ToError(403);
+
+            Brod brod = await s.LoadAsync<Brod>(id);
+            await s.DeleteAsync(brod);
 
             BorbeniBrod o = await s.LoadAsync<BorbeniBrod>(id);
 
